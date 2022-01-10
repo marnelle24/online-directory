@@ -30,7 +30,7 @@
                     :class="{ 'custom_active': menu_selector==4 }" 
                     @click="menu_selector=4"
                     class="rounded-0 border-top border-start border-end btn btn-default">
-                    Pastors/Staffs
+                    Pastors / Staffs
                 </button>
             </li>
         </ul>
