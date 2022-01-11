@@ -42,7 +42,7 @@
                 </a>
 
                 @foreach (\Laravel\Nova\Nova::availableTools(request()) as $tool)
-                    {!! $tool->renderNavigation() !!}
+                    <span class="sidebar-label">{!! $tool->renderNavigation() !!}</span>
                 @endforeach
             </div>
 

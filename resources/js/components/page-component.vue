@@ -6,7 +6,7 @@
                     :class="{ 'custom_active': menu_selector==1 }" 
                     @click="menu_selector=1"
                     class="rounded-0 border-top border-start border-end btn btn-default">
-                    Additional Information
+                    View Info
                 </button>
             </li>
             <li class="nav-item">
@@ -14,7 +14,7 @@
                     :class="{ 'custom_active': menu_selector==2 }" 
                     @click="menu_selector=2"
                     class="rounded-0 border-top border-start border-end btn btn-default">
-                    Contact Details
+                    Contacts
                 </button>
             </li>
             <li class="nav-item" v-if="recordtype == 'church'">
@@ -22,7 +22,7 @@
                     :class="{ 'custom_active': menu_selector==3 }" 
                     @click="menu_selector=3"
                     class="rounded-0 border-top border-start border-end btn btn-default">
-                    Service Schedules
+                    Services
                 </button>
             </li>
             <li class="nav-item" v-if="recordtype == 'church'">
@@ -30,7 +30,7 @@
                     :class="{ 'custom_active': menu_selector==4 }" 
                     @click="menu_selector=4"
                     class="rounded-0 border-top border-start border-end btn btn-default">
-                    Pastors / Staffs
+                    Staffs
                 </button>
             </li>
         </ul>
@@ -126,7 +126,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Position</th>
-                                        <th>Contact</th>
+                                        <th>Contact No</th>
                                         <th>&nbsp;</th>
                                     </tr>
                                 </thead>

@@ -71,6 +71,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
+            (new Visitors())
+                ->width('full')
+                ->canSee(function($request) {
+                    return $request->user()->role_id === 1;
+                }),
+            
             (new NewChurches())
                 ->canSee(function($request) {
                     return $request->user()->role_id === 1;
@@ -85,12 +91,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ->canSee(function($request) {
                     return $request->user()->role_id === 1;
                 }),
-
-            (new Visitors())
-                ->width('full')
-                ->canSee(function($request) {
-                    return $request->user()->role_id === 1;
-                })
+                
 
         ];
     }

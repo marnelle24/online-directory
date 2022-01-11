@@ -11,8 +11,8 @@ body {
     background: #000 url("/images/banner-img.png") no-repeat center center fixed;
     /* background: #000 url("1.png") no-repeat center center fixed; */
     background-size: cover;
-    padding-block: 50px;
-    /* height: 100vh; */
+    /* padding-top: 39px; */
+    height: 100vh;
 }
 
 section {
@@ -362,7 +362,10 @@ input[type="radio"]{
         width: 90%;
     }
 
-
+    .main-background {
+        height: 100vh;
+    }
+    
     .flex-container {
         display: grid;
     }

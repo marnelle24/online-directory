@@ -28,6 +28,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
+use Pdmfc\NovaCards\Info;
 use Sixlive\TextCopy\TextCopy;
 
 class Church extends Resource
@@ -356,10 +357,10 @@ class Church extends Resource
     {
         return [
             
-            // (new NewChurches())
-            //     ->canSee(function(Request $request) {
-            //         return $request->user()->role_id == 1;
-            //     }),
+            (new Info())
+                ->heading('Pending for approval')
+                ->danger('There are 3 churches pending for approval')
+
 
         ];
     }
