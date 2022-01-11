@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -16,7 +19,8 @@
         "laravel/tinker": "^2.5",
         "nalingia/nova-total-records-metric": "^1.0",
         "owenmelbz/nova-radio-field": "^1.0",
-        "sixlive/nova-text-copy-field": "^1.5"
+        "sixlive/nova-text-copy-field": "^1.5",
+        "online-directory/message-card": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -30,6 +34,10 @@
         {
             "type": "path",
             "url": "./nova"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/MessageCard"
         }
     ],
     "autoload": {

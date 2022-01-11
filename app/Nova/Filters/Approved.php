@@ -24,7 +24,10 @@ class Approved extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('is_approved', $value);
+        if($request->resource === 'users')
+            return $query->where('status', $value);    
+        else
+            return $query->where('is_approved', $value);
     }
 
     /**

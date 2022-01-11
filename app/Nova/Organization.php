@@ -4,6 +4,10 @@ namespace App\Nova;
 
 use App\Nova\Actions\AssignOrgCategory;
 use App\Nova\Actions\AssignUser;
+use App\Nova\Filters\Approved;
+use App\Nova\Filters\Denomination;
+use App\Nova\Filters\Published;
+use App\Nova\Filters\Searchable;
 use Eminiarts\Tabs\Tab;
 use Eminiarts\Tabs\Tabs;
 use Illuminate\Http\Request;
@@ -386,7 +390,20 @@ class Organization extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+
+            // set as category
+            (new Denomination)
+                ->canSee(function(Request $request) {
+                    return $request->user()->role_id == 1;
+                }),
+
+            new Approved,
+            
+            new Published,
+
+            new Searchable,
+        ];
     }
 
     /**

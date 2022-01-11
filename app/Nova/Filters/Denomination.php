@@ -15,6 +15,16 @@ class Denomination extends Filter
     public $component = 'select-filter';
 
     /**
+     * Get the displayable name of the filter.
+     *
+     * @return string
+     */
+    public function name()
+    {
+        return 'Group By';
+    }
+
+    /**
      * Apply the filter to the given query.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -24,7 +34,10 @@ class Denomination extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        return $query->where('denomination_id', $value);
+        if($request->resource === 'churches')
+            return $query->where('denomination_id', $value);
+        else
+            return $query->where('category_id', $value);
     }
 
     /**
@@ -35,8 +48,10 @@ class Denomination extends Filter
      */
     public function options(Request $request)
     {
-        // $denomination = \App\Models\Denomination::where('status', true)->pluck('name', 'id')->toArray()
-        $models = \App\Models\Denomination::where('status', true)->get();
+        if($request->resource === 'churches')
+            $models = \App\Models\Denomination::where('status', true)->get();
+        else 
+            $models = \App\Models\OrgCategory::get();
 
         return $models->pluck('id', 'name')->all();
 

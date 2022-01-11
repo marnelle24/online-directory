@@ -71,6 +71,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [
 
+            (new \OnlineDirectory\MessageCard\MessageCard)
+                ->width('full'),
+
+
             (new Visitors())
                 ->width('full')
                 ->canSee(function($request) {

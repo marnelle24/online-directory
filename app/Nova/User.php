@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\Approved;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
@@ -167,7 +168,11 @@ class User extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+
+            new Approved
+
+        ];
     }
 
     /**
