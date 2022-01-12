@@ -91,6 +91,7 @@ export default {
     .custom-messagebox-bg {
         background: #e9a5a5;
         border: 1px solid #b74343;
+        height: inherit !important;
     }
     .custom-msgbox-heading {
         color: #993d3d;

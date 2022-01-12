@@ -8,7 +8,6 @@ use App\Nova\Metrics\NewChurches;
 use App\Nova\Metrics\NewOrganizations;
 use App\Nova\Metrics\Visitors;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
@@ -72,8 +71,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
 
             (new \OnlineDirectory\MessageCard\MessageCard)
-                ->width('full'),
-
+                ->width('3/4'),
 
             (new Visitors())
                 ->width('full')

@@ -18,9 +18,9 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "nalingia/nova-total-records-metric": "^1.0",
+        "online-directory/message-card": "*",
         "owenmelbz/nova-radio-field": "^1.0",
-        "sixlive/nova-text-copy-field": "^1.5",
-        "online-directory/message-card": "*"
+        "sixlive/nova-text-copy-field": "^1.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

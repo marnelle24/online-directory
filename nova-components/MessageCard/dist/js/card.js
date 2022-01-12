@@ -446,7 +446,7 @@ exports = module.exports = __webpack_require__(8)(false);
 
 
 // module
-exports.push([module.i, "\n.custom-messagebox-bg[data-v-b9bc2c0a] {\n    background: #e9a5a5;\n    border: 1px solid #b74343;\n}\n.custom-msgbox-heading[data-v-b9bc2c0a] {\n    color: #993d3d;\n    font-size: 20px;\n}\n.custom-list[data-v-b9bc2c0a] {\n    list-style: none;\n}\n.custom-list li[data-v-b9bc2c0a] {\n    margin-bottom: 10px;\n}\n.custom-list li a[data-v-b9bc2c0a] {\n    color: #543131;\n    text-decoration: none;\n    font-size: 18px;\n}\n.custom-list li a[data-v-b9bc2c0a]:hover {\n    color: #763636;\n    font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "\n.custom-messagebox-bg[data-v-b9bc2c0a] {\n    background: #e9a5a5;\n    border: 1px solid #b74343;\n    height: inherit !important;\n}\n.custom-msgbox-heading[data-v-b9bc2c0a] {\n    color: #993d3d;\n    font-size: 20px;\n}\n.custom-list[data-v-b9bc2c0a] {\n    list-style: none;\n}\n.custom-list li[data-v-b9bc2c0a] {\n    margin-bottom: 10px;\n}\n.custom-list li a[data-v-b9bc2c0a] {\n    color: #543131;\n    text-decoration: none;\n    font-size: 18px;\n}\n.custom-list li a[data-v-b9bc2c0a]:hover {\n    color: #763636;\n    font-weight: bold;\n}\n", ""]);
 
 // exports
 
