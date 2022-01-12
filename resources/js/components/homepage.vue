@@ -2,7 +2,7 @@
     <div>
         <div class="main-background">
             <section>
-                <div class="flex-container">
+                <div class="flex-container pt-5">
                     <div class="flex-child">
                         <a href="#">
                             <img src="/images/nccs_logo.png" alt="NCCS_logo" class="logo-attribute" />
