@@ -1,5 +1,5 @@
 <template>
-    <card class="flex flex-col custom-messagebox-bg">
+    <card class="flex flex-col custom-messagebox-bg" v-if="totalPendingRecords > 0">
         <div class="px-4 py-4">
             <img v-if="loading" src="/images/spinner.gif" width="75" />
             <template v-else>
@@ -15,19 +15,19 @@
                 <br />
                 <br />
                 <ul class="custom-list pl-4">
-                    <li class="custom-list-item">
+                    <li class="custom-list-item" v-if="pendingChurches > 0">
                         <a href="/admin/resources/churches?churches_page=1&churches_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXERlbm9taW5hdGlvbiIsInZhbHVlIjoiIn0seyJjbGFzcyI6IkFwcFxcTm92YVxcRmlsdGVyc1xcQXBwcm92ZWQiLCJ2YWx1ZSI6IjAifSx7ImNsYXNzIjoiQXBwXFxOb3ZhXFxGaWx0ZXJzXFxQdWJsaXNoZWQiLCJ2YWx1ZSI6IiJ9LHsiY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXFNlYXJjaGFibGUiLCJ2YWx1ZSI6IiJ9XQ%3D%3D">
-                            <strong>{{ pendingChurch }}</strong> Churches pending for approval
+                            <strong>{{ pendingChurches }}</strong> {{ pendingChurches > 1 ? 'churches' : 'church' }} pending for approval
                         </a>
                     </li>
-                    <li class="custom-list-item">
+                    <li class="custom-list-item" v-if="pendingOrgs > 0">
                         <a href="/admin/resources/organizations?organizations_page=1&organizations_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXERlbm9taW5hdGlvbiIsInZhbHVlIjoiIn0seyJjbGFzcyI6IkFwcFxcTm92YVxcRmlsdGVyc1xcQXBwcm92ZWQiLCJ2YWx1ZSI6IjAifSx7ImNsYXNzIjoiQXBwXFxOb3ZhXFxGaWx0ZXJzXFxQdWJsaXNoZWQiLCJ2YWx1ZSI6IiJ9LHsiY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXFNlYXJjaGFibGUiLCJ2YWx1ZSI6IiJ9XQ%3D%3D">
-                            <strong>{{ pendingOrg }}</strong> Organisations pending for approval
+                            <strong>{{ pendingOrgs }}</strong> {{ pendingOrgs > 1 ? 'organisations' : 'organisation' }} pending for approval
                         </a>
                     </li>
-                    <li class="custom-list-item">
+                    <li class="custom-list-item" v-if="pendingUsers > 0">
                         <a href="/admin/resources/users?users_page=1&users_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXEFwcHJvdmVkIiwidmFsdWUiOiIwIn1d">
-                        <strong>{{ pendingUser }}</strong> User account registration pending for approval
+                        <strong>{{ pendingUsers }}</strong> {{ pendingUsers > 1 ? 'user registrations' : 'user registration' }} pending for approval
                         </a>
                     </li>
                 </ul>
@@ -51,19 +51,38 @@ export default {
     data() {
         return {
             loading: false,
-            pendingChurch: 0,
-            pendingOrg: 0,
-            pendingUser: 0
+            pendingChurches: 0,
+            pendingOrgs: 0,
+            pendingUsers: 0,
+            totalPendingRecords: 0
         }
 
     },
 
     mounted() {
-        setTimeout(() => {
-            this.loading = true;
-        }, 3000)
 
-        this.loading = false;
+        this.loading = true;
+
+        setTimeout(() => {
+            
+           axios.post('/nova-vendor/'+this.card.component+'/checkPendingRecords')
+                .then((response) => {
+                    
+                    this.totalPendingRecords = response.data.total;
+                    this.pendingChurches= response.data.totalChurches;
+                    this.pendingOrgs    = response.data.totalOrgs;
+                    this.pendingUsers   = response.data.totalUsers;
+
+                    this.loading = false;
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+
+        }, 2000);
+
+       
+
     },
 }
 </script>

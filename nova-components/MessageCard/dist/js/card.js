@@ -291,19 +291,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             loading: false,
-            pendingChurch: 0,
-            pendingOrg: 0,
-            pendingUser: 0
+            pendingChurches: 0,
+            pendingOrgs: 0,
+            pendingUsers: 0,
+            totalPendingRecords: 0
         };
     },
     mounted: function mounted() {
         var _this = this;
 
-        setTimeout(function () {
-            _this.loading = true;
-        }, 3000);
+        this.loading = true;
 
-        this.loading = false;
+        setTimeout(function () {
+
+            axios.post('/nova-vendor/' + _this.card.component + '/checkPendingRecords').then(function (response) {
+
+                _this.totalPendingRecords = response.data.total;
+                _this.pendingChurches = response.data.totalChurches;
+                _this.pendingOrgs = response.data.totalOrgs;
+                _this.pendingUsers = response.data.totalUsers;
+
+                _this.loading = false;
+            }).catch(function (error) {
+                alert(error);
+            });
+        }, 2000);
     }
 });
 
@@ -708,108 +720,138 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("card", { staticClass: "flex flex-col custom-messagebox-bg" }, [
-    _c(
-      "div",
-      { staticClass: "px-4 py-4" },
-      [
-        _vm.loading
-          ? _c("img", { attrs: { src: "/images/spinner.gif", width: "75" } })
-          : [
-              _c(
-                "svg",
-                {
-                  staticClass: "h-5 w-6 custom-msgbox-heading",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    fill: "none",
-                    viewBox: "0 0 24 20",
-                    stroke: "currentColor"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round",
-                      "stroke-width": "2",
-                      d:
-                        "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                    }
-                  })
+  return _vm.totalPendingRecords > 0
+    ? _c("card", { staticClass: "flex flex-col custom-messagebox-bg" }, [
+        _c(
+          "div",
+          { staticClass: "px-4 py-4" },
+          [
+            _vm.loading
+              ? _c("img", {
+                  attrs: { src: "/images/spinner.gif", width: "75" }
+                })
+              : [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "h-5 w-6 custom-msgbox-heading",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        fill: "none",
+                        viewBox: "0 0 24 20",
+                        stroke: "currentColor"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round",
+                          "stroke-width": "2",
+                          d:
+                            "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { staticClass: "text-l font-bold custom-msgbox-heading" },
+                    [_vm._v("Pending for Approval")]
+                  ),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "custom-list pl-4" }, [
+                    _vm.pendingChurches > 0
+                      ? _c("li", { staticClass: "custom-list-item" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href:
+                                  "/admin/resources/churches?churches_page=1&churches_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXERlbm9taW5hdGlvbiIsInZhbHVlIjoiIn0seyJjbGFzcyI6IkFwcFxcTm92YVxcRmlsdGVyc1xcQXBwcm92ZWQiLCJ2YWx1ZSI6IjAifSx7ImNsYXNzIjoiQXBwXFxOb3ZhXFxGaWx0ZXJzXFxQdWJsaXNoZWQiLCJ2YWx1ZSI6IiJ9LHsiY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXFNlYXJjaGFibGUiLCJ2YWx1ZSI6IiJ9XQ%3D%3D"
+                              }
+                            },
+                            [
+                              _c("strong", [
+                                _vm._v(_vm._s(_vm.pendingChurches))
+                              ]),
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.pendingChurches > 1
+                                      ? "churches"
+                                      : "church"
+                                  ) +
+                                  " pending for approval\n                    "
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.pendingOrgs > 0
+                      ? _c("li", { staticClass: "custom-list-item" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href:
+                                  "/admin/resources/organizations?organizations_page=1&organizations_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXERlbm9taW5hdGlvbiIsInZhbHVlIjoiIn0seyJjbGFzcyI6IkFwcFxcTm92YVxcRmlsdGVyc1xcQXBwcm92ZWQiLCJ2YWx1ZSI6IjAifSx7ImNsYXNzIjoiQXBwXFxOb3ZhXFxGaWx0ZXJzXFxQdWJsaXNoZWQiLCJ2YWx1ZSI6IiJ9LHsiY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXFNlYXJjaGFibGUiLCJ2YWx1ZSI6IiJ9XQ%3D%3D"
+                              }
+                            },
+                            [
+                              _c("strong", [_vm._v(_vm._s(_vm.pendingOrgs))]),
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.pendingOrgs > 1
+                                      ? "organisations"
+                                      : "organisation"
+                                  ) +
+                                  " pending for approval\n                    "
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.pendingUsers > 0
+                      ? _c("li", { staticClass: "custom-list-item" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href:
+                                  "/admin/resources/users?users_page=1&users_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXEFwcHJvdmVkIiwidmFsdWUiOiIwIn1d"
+                              }
+                            },
+                            [
+                              _c("strong", [_vm._v(_vm._s(_vm.pendingUsers))]),
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.pendingUsers > 1
+                                      ? "user registrations"
+                                      : "user registration"
+                                  ) +
+                                  " pending for approval\n                    "
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ])
                 ]
-              ),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "text-l font-bold custom-msgbox-heading" },
-                [_vm._v("Pending for Approval")]
-              ),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("ul", { staticClass: "custom-list pl-4" }, [
-                _c("li", { staticClass: "custom-list-item" }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href:
-                          "/admin/resources/churches?churches_page=1&churches_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXERlbm9taW5hdGlvbiIsInZhbHVlIjoiIn0seyJjbGFzcyI6IkFwcFxcTm92YVxcRmlsdGVyc1xcQXBwcm92ZWQiLCJ2YWx1ZSI6IjAifSx7ImNsYXNzIjoiQXBwXFxOb3ZhXFxGaWx0ZXJzXFxQdWJsaXNoZWQiLCJ2YWx1ZSI6IiJ9LHsiY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXFNlYXJjaGFibGUiLCJ2YWx1ZSI6IiJ9XQ%3D%3D"
-                      }
-                    },
-                    [
-                      _c("strong", [_vm._v(_vm._s(_vm.pendingChurch))]),
-                      _vm._v(
-                        " Churches pending for approval\n                    "
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "custom-list-item" }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href:
-                          "/admin/resources/organizations?organizations_page=1&organizations_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXERlbm9taW5hdGlvbiIsInZhbHVlIjoiIn0seyJjbGFzcyI6IkFwcFxcTm92YVxcRmlsdGVyc1xcQXBwcm92ZWQiLCJ2YWx1ZSI6IjAifSx7ImNsYXNzIjoiQXBwXFxOb3ZhXFxGaWx0ZXJzXFxQdWJsaXNoZWQiLCJ2YWx1ZSI6IiJ9LHsiY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXFNlYXJjaGFibGUiLCJ2YWx1ZSI6IiJ9XQ%3D%3D"
-                      }
-                    },
-                    [
-                      _c("strong", [_vm._v(_vm._s(_vm.pendingOrg))]),
-                      _vm._v(
-                        " Organisations pending for approval\n                    "
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "custom-list-item" }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href:
-                          "/admin/resources/users?users_page=1&users_filter=W3siY2xhc3MiOiJBcHBcXE5vdmFcXEZpbHRlcnNcXEFwcHJvdmVkIiwidmFsdWUiOiIwIn1d"
-                      }
-                    },
-                    [
-                      _c("strong", [_vm._v(_vm._s(_vm.pendingUser))]),
-                      _vm._v(
-                        " User account registration pending for approval\n                    "
-                      )
-                    ]
-                  )
-                ])
-              ])
-            ]
-      ],
-      2
-    )
-  ])
+          ],
+          2
+        )
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
